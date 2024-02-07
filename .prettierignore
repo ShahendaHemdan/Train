@@ -1,0 +1,7 @@
+# .prettierignore
+
+# Ignore all files in the project
+/*
+
+# Add exceptions for files or directories you want to format
+!src/**/*.ts
