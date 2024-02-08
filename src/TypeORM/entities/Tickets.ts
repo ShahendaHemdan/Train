@@ -1,6 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { Trip } from './Trip';
-import { User } from './User';
 // import { User } from './User';
 @Entity()
 export class Ticket {
@@ -13,19 +12,17 @@ export class Ticket {
     price: number;
 
     @Column()
-    seatNumber: number;
+    availTic: number;
 
-    // Define the relationship with Trip Class 
-
-    @OneToOne(() => Trip, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
-    @JoinColumn()
-    Trip: Trip
+   // Define the relationship with Trip class
+  @OneToMany(() => Trip, trip => trip.ticket)
+  trips: Trip[];
 
 
     // Define the relationship with User Class 
 
-    @ManyToOne(() => User, user => user.tickets, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
-    user: User;
+    // @ManyToOne(() => User, user => user.tickets, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
+    // user: User;
 
 }
 

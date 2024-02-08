@@ -2,6 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn, JoinColumn, OneToMany,ManyToOne
 import { Train } from './Train';
 import { Delay } from './Delay';
 import { IsDate, IsNotEmpty, IsString } from 'class-validator';
+import { Ticket } from './Tickets';
 @Entity()
 export class Trip {
 
@@ -45,6 +46,11 @@ export class Trip {
     // Define the relationship with Delay entity
     @OneToMany(() => Delay, delay => delay.Trip, { cascade: true })
     delays: Delay[];
+
+     // Define the relationship with Ticket class
+    @ManyToOne(() => Ticket, ticket => ticket.trips)
+    @JoinColumn()
+    ticket: Ticket;
 
 
 }

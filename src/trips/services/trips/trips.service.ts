@@ -3,6 +3,7 @@ import {   Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Trip } from 'src/TypeORM/entities/Trip';
 import { Train } from 'src/TypeORM/entities/Train';
+import { TrainsService } from 'src/trains/services/trains/trains.service';
 
 
 @Injectable()
@@ -11,6 +12,7 @@ export class TripsService {
 
     constructor(@InjectRepository(Trip) private tripRepository:Repository<Trip>,
     @InjectRepository(Train) private trainRepository: Repository<Train>,
+    private trainServiece:TrainsService
     ){
     
     }
@@ -28,6 +30,7 @@ export class TripsService {
 
     async createTripWithDetails( trainId: number, tripDetails: Partial<Trip>): Promise<Trip> {
         const train = await this.trainRepository.findOne({ where: { id: trainId } });
+        // const train2= await this.trainServiece.findTrainById(trainId)
 
         if (!train) {
             throw new HttpException('Route or Train not found', HttpStatus.NOT_FOUND);

@@ -1,6 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, } from 'typeorm';
 import { UserRole } from '../Enums/UserRole.Enum';
-import { Ticket } from './Tickets';
 @Entity()
 export class User{
     @PrimaryGeneratedColumn({type:'bigint'})
@@ -27,8 +26,8 @@ export class User{
         role: UserRole;
 
     
-    /// Establishing one-to-many relationship with Ticket entity
-    @OneToMany(() => Ticket, ticket => ticket.user, { cascade: true })
-    tickets: Ticket[];
+    // /// Establishing one-to-many relationship with Ticket entity
+    // @OneToMany(() => Ticket, ticket => ticket.user, { cascade: true })
+    // tickets: Ticket[];
 
 }

@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import {  Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Ticket } from 'src/TypeORM/entities/Tickets';
@@ -11,43 +11,24 @@ export class TicketsService {
 
     }
     findAllTickets(){
-        return this.ticketRepository.find({relations:["Trip"]});
+        return this.ticketRepository.find({relations:["trips"]});
     }
 
 
     findTicketById(id:number){
-        return this.ticketRepository.findOne({ where: { id }, relations: ["Trip"] });
+        return this.ticketRepository.findOne({ where: { id }, relations: ["trips"] });
 
     }
 
-    createTicket(ticketDetails:Trip){
-        const newTicket=this.ticketRepository.create(ticketDetails);
-        return this.ticketRepository.save(newTicket);
-    }
 
-
-
-    async createTcketWithDetails( tripId: number, ticketDetails: Partial<Ticket>): Promise<Ticket> {
-        const trip = await this.tripRepository.findOne({ where: { id: tripId } });
-
-        if (!trip) {
-            throw new HttpException('trip not found', HttpStatus.NOT_FOUND);
-        }
-
-        const newTicket = this.ticketRepository.create({
-            ...ticketDetails,
-            Trip: trip,
-        });
+    async createTcketWithDetails( ticketDetails: Ticket): Promise<Ticket> {
+        const newTicket = this.ticketRepository.create(ticketDetails);
 
         return this.ticketRepository.save(newTicket);
     }
 
-    async updateTicket(id:number,tripId: number,ticketDetails:Trip){
-        const trip = await this.tripRepository.findOne({ where: { id: tripId } });
-        if (!trip) {
-            throw new HttpException('trip not found', HttpStatus.NOT_FOUND);
-        }
-        return this.ticketRepository.update({ id, Trip: trip }, ticketDetails);
+    async updateTicket(id:number,ticketDetails:Ticket){
+        return this.ticketRepository.update({ id }, ticketDetails);
     }
 
     deleteTicket(id:number){
