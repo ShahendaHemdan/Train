@@ -9,11 +9,15 @@ import { BookingService } from './services/booking/booking.service';
 import { TripsService } from 'src/trips/services/trips/trips.service';
 import { Train } from 'src/TypeORM/entities/Train';
 import { TrainsService } from 'src/trains/services/trains/trains.service';
+import { UserTicket } from 'src/TypeORM/entities/UserTicket ';
+import { ServicesService } from 'src/users/services/services.service';
+import { ControllersController } from 'src/users/controllers/controllers.controller';
+import { User } from 'src/TypeORM/entities/User';
 
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Ticket,Trip,Train])],
-  controllers: [TicketsController, BookingController],
-  providers: [TicketsService, BookingService,TripsService,TrainsService]
+  imports: [TypeOrmModule.forFeature([Ticket,Trip,Train,UserTicket,User])],
+  controllers: [TicketsController, BookingController,ControllersController],
+  providers: [TicketsService, BookingService,TripsService,TrainsService,ServicesService]
 })
 export class TicketsModule {}

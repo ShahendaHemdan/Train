@@ -1,5 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { Trip } from './Trip';
+import { UserTicket } from './UserTicket ';
 // import { User } from './User';
 @Entity()
 export class Ticket {
@@ -21,8 +22,8 @@ export class Ticket {
 
     // Define the relationship with User Class 
 
-    // @ManyToOne(() => User, user => user.tickets, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
-    // user: User;
+    @OneToMany(() => UserTicket, userTicket => userTicket.ticket)
+  userTickets: UserTicket[];
 
 }
 

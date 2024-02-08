@@ -20,11 +20,27 @@ export class TicketsService {
 
     }
 
+    findTicketBy(id:number){
+        return this.ticketRepository.findBy({ id });
+
+    }
 
     async createTcketWithDetails( ticketDetails: Ticket): Promise<Ticket> {
         const newTicket = this.ticketRepository.create(ticketDetails);
 
         return this.ticketRepository.save(newTicket);
+    }
+
+    async decrementTickets( id: number){
+        const ticket = await this.findTicketById(id);
+        if (ticket && ticket.availTic) {
+          const availTic = ticket.availTic - 1;
+          return this.ticketRepository.update({ id }, { availTic });
+        } else {
+          return null;
+        }
+        
+
     }
 
     async updateTicket(id:number,ticketDetails:Ticket){

@@ -16,6 +16,7 @@ import { Delay } from './TypeORM/entities/Delay';
 import { DelaysModule } from './delays/delays.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+import { UserTicket } from './TypeORM/entities/UserTicket ';
 
 
 @Module({
@@ -27,7 +28,7 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
       username: 'root',
       password: '',
       database: 'railway',
-      entities: [User,Train,Station,Trip,Ticket,Delay],
+      entities: [User,Train,Station,Trip,Ticket,Delay,UserTicket],
       synchronize: true,
     }),
     UsersModule,
