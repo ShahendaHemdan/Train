@@ -8,16 +8,24 @@ export class BookingService {
     constructor(
         @InjectRepository(UserTicket)
         private readonly userTicketRepository: Repository<UserTicket>,
-      ) {}
+    ) { }
 
-      async bookTicket(bookingData: UserTicket): Promise<UserTicket> {
+    async bookTicket(bookingData: UserTicket): Promise<UserTicket> {
 
-                const newTicket = this.userTicketRepository.create(bookingData);
-            
-                return await this.userTicketRepository.save(newTicket);
-                }
-            
+        const newTicket = this.userTicketRepository.create(bookingData);
 
-      }
+        return await this.userTicketRepository.save(newTicket);
+    }
+
+    findBookingById(id:number){
+        return this.userTicketRepository.findOne({ where: { id }, relations: ["ticket"] });
+    }
+
+    cancel(id:number){
+        this.userTicketRepository.delete(id);
+    }
+
+
+}
 
 
