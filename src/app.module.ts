@@ -38,7 +38,8 @@ import { UserTicket } from './TypeORM/entities/UserTicket ';
     TicketsModule,
     DelaysModule,
     ScheduleModule.forRoot(),
-    EventEmitterModule.forRoot()
+    EventEmitterModule.forRoot(),
+    
   ],
   controllers: [AppController],
   providers: [AppService],

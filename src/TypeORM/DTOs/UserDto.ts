@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 
-import { IsEmail, IsNotEmpty, IsString, IsEnum,  } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString,  } from 'class-validator';
 import { UserRole } from '../Enums/UserRole.Enum';
 
 export class UserDTO {
@@ -23,8 +23,6 @@ export class UserDTO {
     @IsNotEmpty()
     password: string;
 
-    @IsNotEmpty()
-    @IsEnum(UserRole)
     role: UserRole;
 
 

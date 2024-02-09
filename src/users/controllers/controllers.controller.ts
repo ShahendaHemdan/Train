@@ -37,9 +37,9 @@ export class ControllersController {
 
     @Post()
     @UsePipes(ValidationPipe)
-    addUser(@Body() userDto: UserDTO, @Res() res: Response) {
+    async addUser(@Body() userDto: UserDTO, @Res() res: Response) {
 
-        const oldUser=this.userService.findUserByEmail(userDto.email);
+        const oldUser=await this.userService.findUserByEmail(userDto.email);
         // Check If Email Existed
         if(oldUser){
             return res.status(400).json({status:HttpStatus.BAD_REQUEST,msg:'This User Is Already Registered'});
