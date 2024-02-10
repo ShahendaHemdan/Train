@@ -13,10 +13,16 @@ import { UserTicket } from 'src/TypeORM/entities/UserTicket ';
 import { ServicesService } from 'src/users/services/services.service';
 import { ControllersController } from 'src/users/controllers/controllers.controller';
 import { User } from 'src/TypeORM/entities/User';
-
+import { JwtModule } from '@nestjs/jwt';
+import { PassportModule } from '@nestjs/passport';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Ticket,Trip,Train,UserTicket,User])],
+  imports: [TypeOrmModule.forFeature([Ticket,Trip,Train,UserTicket,User]),
+  PassportModule,
+  JwtModule.register({
+    secret: 'abc123',
+    signOptions: { expiresIn: '1h' },
+  }),],
   controllers: [TicketsController, BookingController,ControllersController],
   providers: [TicketsService, BookingService,TripsService,TrainsService,ServicesService]
 })

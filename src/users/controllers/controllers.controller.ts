@@ -1,7 +1,13 @@
-import { Body, Controller, Delete, Get, HttpStatus, Param, ParseIntPipe, Patch, Post, Res, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, ParseIntPipe, Patch, Post, Res, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ServicesService } from '../services/services.service';
 import { UserDTO } from 'src/TypeORM/DTOs/UserDto';
 import { Response } from 'express';
+import { JwtAuthGuard } from 'src/guards/jwt.guard';
+import { AuthurizationGuard } from 'src/guards/Authorization.guard';
+import { Role } from 'src/decorators/roles.decorator';
+
+@Role('admin')
+@UseGuards(JwtAuthGuard,AuthurizationGuard)
 
 @Controller('users')
 export class ControllersController {
