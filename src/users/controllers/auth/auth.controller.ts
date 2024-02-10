@@ -1,17 +1,15 @@
-import { Body, Controller, HttpStatus, Post, Res, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, HttpStatus,  Post, Res, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { UserDTO } from 'src/TypeORM/DTOs/UserDto';
 import { AuthService } from 'src/users/services/auth/auth.service';
 import { ServicesService } from 'src/users/services/services.service';
 import { Response } from 'express';
-import * as bcrypt from 'bcrypt';
-import { JwtService } from '@nestjs/jwt';
+import { LocalGuard } from 'src/guards/local.guard';
 
 @Controller('auth')
 export class AuthController {
 
     constructor(private userService: ServicesService,
                 private authService:AuthService,
-                private jwtService: JwtService
         ) {}
 
     @Post('register')
@@ -24,7 +22,7 @@ export class AuthController {
             return res.status(400).json({status:HttpStatus.BAD_REQUEST,msg:'This User Is Already Registered'});
 
         }else{
-            const user = this.authService.register(userDto);
+            const user =await this.authService.register(userDto);
             if (user) {
                 return res.status(201).json({status:HttpStatus.CREATED,msg:' User Registered Sucessfully'});
     
@@ -37,23 +35,12 @@ export class AuthController {
 
 
     @Post('login')
+    @UseGuards(LocalGuard)
     @UsePipes(ValidationPipe)
-    async Login(@Body('email') email:string,
-                @Body('password') password:string,
-                @Res() res: Response) 
-        {
-
-                    const oldUser=await this.userService.findUserByEmail(email);
-                    const compared=await bcrypt.compare(password,oldUser.password);
-                    if(oldUser && compared){
-                        const payload = { sub: oldUser.id, email: email };
-                        const token=this.jwtService.sign(payload);
-                        return res.status(200).json({status:HttpStatus.OK,role:oldUser.role,token:token});
-                    }else{
-                            return res.status(400).json({status:HttpStatus.BAD_REQUEST,msg:"Wrong Email Or Password"});
-                            
-                        }
-        }
+    async Login(@Body() body: any) {
+        const { email, password } = body;
+        return this.authService.Login(email, password);
+    }
 
 }
 
