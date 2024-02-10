@@ -4,13 +4,14 @@ import { AuthService } from 'src/users/services/auth/auth.service';
 import { ServicesService } from 'src/users/services/services.service';
 import { Response } from 'express';
 import * as bcrypt from 'bcrypt';
-
+import { JwtService } from '@nestjs/jwt';
 
 @Controller('auth')
 export class AuthController {
 
     constructor(private userService: ServicesService,
                 private authService:AuthService,
+                private jwtService: JwtService
         ) {}
 
     @Post('register')
@@ -46,7 +47,8 @@ export class AuthController {
                     const compared=await bcrypt.compare(password,oldUser.password);
                     if(oldUser && compared){
                         const payload = { sub: oldUser.id, email: email };
-                        return res.status(200).json({status:HttpStatus.OK,msg:payload});
+                        const token=this.jwtService.sign(payload);
+                        return res.status(200).json({status:HttpStatus.OK,role:oldUser.role,token:token});
                     }else{
                             return res.status(400).json({status:HttpStatus.BAD_REQUEST,msg:"Wrong Email Or Password"});
                             
