@@ -1,17 +1,20 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { Trip } from './Trip';
 import { UserTicket } from './UserTicket ';
-// import { User } from './User';
+import { IsNotEmpty, IsNumber } from 'class-validator';
 @Entity()
 export class Ticket {
 
     @PrimaryGeneratedColumn({ type: 'bigint' })
     id: number;
 
-
+    @IsNotEmpty()
+    @IsNumber()
     @Column()
     price: number;
 
+    @IsNotEmpty()
+    @IsNumber()
     @Column()
     availTic: number;
 

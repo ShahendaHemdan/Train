@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, JoinColumn, OneToMany,ManyToOne } from 'typeorm';
 import { Train } from './Train';
 import { Delay } from './Delay';
-import { IsDate, IsNotEmpty, IsString } from 'class-validator';
+import {  IsNotEmpty, IsString } from 'class-validator';
 import { Ticket } from './Tickets';
 @Entity()
 export class Trip {
@@ -17,13 +17,11 @@ export class Trip {
 
     @Column()
     @IsNotEmpty()
-    @IsDate()
     arrTime: Date;
 
 
     @Column()
     @IsNotEmpty()
-    @IsDate()
     deptTime: Date;
 
     @Column()

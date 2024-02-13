@@ -1,9 +1,13 @@
-import { Body, Controller, Delete, Get, HttpStatus, Param, ParseIntPipe, Patch, Post, Res, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, ParseIntPipe, Patch, Post, Res, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { TicketsService } from 'src/tickets/services/tickets/tickets.service';
 import { Response } from "express"
 import { TripsService } from 'src/trips/services/trips/trips.service';
 import { Ticket } from 'src/TypeORM/entities/Tickets';
-
+import { Role } from 'src/decorators/roles.decorator';
+import { AuthurizationGuard } from 'src/guards/Authorization.guard';
+import { JwtAuthGuard } from 'src/guards/jwt.guard';
+@Role('admin')
+@UseGuards(JwtAuthGuard,AuthurizationGuard)
 @Controller('tickets')
 export class TicketsController {
     constructor(private ticketService: TicketsService,
@@ -15,8 +19,6 @@ export class TicketsController {
         const tickets = await this.ticketService.findAllTickets();
 
         if (tickets[0]) {
-            //Map Station Obj To Dto
-            // const ticketDTO = tickets.map(ticket => TicketDTO.createFromPlainObject(ticket));
             return res.status(200).json({ status: HttpStatus.OK, data: tickets })
         } else {
             return res.status(404).json({ status: HttpStatus.NOT_FOUND, msg: 'There are no Tickets' })

@@ -1,7 +1,7 @@
 // import { RouteDTO } from './RouteDTO'; // Assuming you've already created RouteDTO
 import { Station } from '../entities/Station';
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
-import { DelayDTO } from './DelayDto2';
+import { DelayDTO } from './DelayDto';
 
 export class StationDTO {
 

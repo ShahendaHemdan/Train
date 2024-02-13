@@ -30,10 +30,9 @@ export class TripsService {
 
     async createTripWithDetails( trainId: number, tripDetails: Partial<Trip>): Promise<Trip> {
         const train = await this.trainRepository.findOne({ where: { id: trainId } });
-        // const train2= await this.trainServiece.findTrainById(trainId)
 
         if (!train) {
-            throw new HttpException('Route or Train not found', HttpStatus.NOT_FOUND);
+            throw new HttpException('Train not found', HttpStatus.NOT_FOUND);
         }
 
         const newTrip = this.tripRepository.create({

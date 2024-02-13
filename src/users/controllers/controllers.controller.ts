@@ -48,12 +48,12 @@ export class ControllersController {
         const oldUser=await this.userService.findUserByEmail(userDto.email);
         // Check If Email Existed
         if(oldUser){
-            return res.status(400).json({status:HttpStatus.BAD_REQUEST,msg:'This User Is Already Registered'});
+            return res.status(400).json({status:HttpStatus.BAD_REQUEST,msg:'This Email Is Already Registered'});
 
         }else{
             const user = this.userService.createUser(userDto);
             if (user) {
-                return res.status(201).json({status:HttpStatus.CREATED,data:user});
+                return res.status(201).json({status:HttpStatus.CREATED,msg:'User Added Successfully'});
     
             } else {
                 return res.status(404).json({status:HttpStatus.BAD_REQUEST,msg:'User Did Not Saved'});

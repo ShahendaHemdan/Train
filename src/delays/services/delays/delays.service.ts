@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Delay } from 'src/TypeORM/entities/Delay';
-import { DelayDTO } from 'src/TypeORM/DTOs/DelayDto2';
+import { DelayDTO } from 'src/TypeORM/DTOs/DelayDto';
 import { Trip } from 'src/TypeORM/entities/Trip';
 import { TripsService } from 'src/trips/services/trips/trips.service';
 import { Cron, CronExpression } from '@nestjs/schedule';

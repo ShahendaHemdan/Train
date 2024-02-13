@@ -1,10 +1,11 @@
-import { Body, Controller, Delete, HttpStatus, Param, ParseIntPipe, Post, Res } from '@nestjs/common';
+import { Body, Controller, Delete, HttpStatus, Param, ParseIntPipe, Post, Res, UseGuards } from '@nestjs/common';
 import { UserTicket } from 'src/TypeORM/entities/UserTicket ';
 import { BookingService } from 'src/tickets/services/booking/booking.service';
 import { TicketsService } from 'src/tickets/services/tickets/tickets.service';
 import { ServicesService } from 'src/users/services/services.service';
 import { Response } from "express"
-
+import { JwtAuthGuard } from 'src/guards/jwt.guard';
+@UseGuards(JwtAuthGuard)
 @Controller('booking')
 export class BookingController {
 

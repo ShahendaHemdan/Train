@@ -24,7 +24,6 @@ export class StationsService {
     }
 
     updateStation(id:number,staionDetails:Station){
-        console.log(staionDetails);
         return this.stationRepository.update({ id },staionDetails)
     }
 
