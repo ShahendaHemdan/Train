@@ -6,7 +6,7 @@ import { TripDTO } from 'src/TypeORM/DTOs/TripDto';
 import { OnEvent } from '@nestjs/event-emitter';
 import { JwtAuthGuard } from 'src/guards/jwt.guard';
 
-@UseGuards(JwtAuthGuard)
+// @UseGuards(JwtAuthGuard)
 @Controller('trips')
 export class TripsController {
     private delayAdded = false;

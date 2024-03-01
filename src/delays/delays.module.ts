@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
 import { DelaysService } from './services/delays/delays.service';
 import { DelaysController } from './controllers/delays/delays.controller';
