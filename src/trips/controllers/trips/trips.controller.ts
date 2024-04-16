@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, ParseIntPipe, Post, Put, Res, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { Trip } from 'src/TypeORM/entities/Trip';
 import { TripsService } from 'src/trips/services/trips/trips.service';
@@ -21,6 +22,18 @@ export class TripsController {
 
     @Get()
     async getAllTrips(@Res() res: Response) {
+    
+        const trips = await this.tripService.findAllTrips();
+        if (trips[0]) {
+            const tripDTO = trips.map((trip) => TripDTO.createFromEntity(trip));
+            res.status(200).json({ Status: HttpStatus.OK, Data: tripDTO });
+        } else {
+            throw new HttpException('There are no Trips', HttpStatus.NOT_FOUND);
+        }
+
+    }
+    @Get("sse")
+    async getAllTripsSse(@Res() res: Response) {
         res.setHeader('Content-Type', 'text/event-stream');
         res.setHeader('Cache-Control', 'no-cache');
         res.setHeader('Connection', 'keep-alive');

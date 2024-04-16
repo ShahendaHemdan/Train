@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { Trip } from './Trip';
 import { UserTicket } from './UserTicket ';
@@ -19,13 +20,13 @@ export class Ticket {
     availTic: number;
 
    // Define the relationship with Trip class
-  @OneToMany(() => Trip, trip => trip.ticket)
+  @OneToMany(() => Trip, trip => trip.ticket,{ cascade: true })
   trips: Trip[];
 
 
     // Define the relationship with User Class 
 
-    @OneToMany(() => UserTicket, userTicket => userTicket.ticket)
+    @OneToMany(() => UserTicket, userTicket => userTicket.ticket,{ cascade: true })
   userTickets: UserTicket[];
 
 }
