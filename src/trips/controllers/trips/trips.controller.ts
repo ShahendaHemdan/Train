@@ -32,6 +32,8 @@ export class TripsController {
         }
 
     }
+
+   
     @Get("sse")
     async getAllTripsSse(@Res() res: Response) {
         res.setHeader('Content-Type', 'text/event-stream');
