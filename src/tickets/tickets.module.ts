@@ -21,7 +21,7 @@ import { PassportModule } from '@nestjs/passport';
   PassportModule,
   JwtModule.register({
     secret: 'abc123',
-    signOptions: { expiresIn: '1d' },
+    signOptions: { expiresIn: '30d' },
   }),],
   controllers: [TicketsController, BookingController,ControllersController],
   providers: [TicketsService, BookingService,TripsService,TrainsService,ServicesService]

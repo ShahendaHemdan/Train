@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
 import { Ticket } from "./Tickets";
 import { User } from "./User";
+import { Trip } from "./Trip";
 
 @Entity('user_ticket')
 export class UserTicket {
@@ -17,4 +18,8 @@ export class UserTicket {
   @ManyToOne(() => Ticket, ticket => ticket.userTickets,{ onDelete: 'CASCADE', onUpdate: 'CASCADE' })
   @JoinColumn({ name: 'ticketId' })
   ticket: Ticket;
+
+  @ManyToOne(() => Trip, trip => trip.userTickets,{ onDelete: 'CASCADE', onUpdate: 'CASCADE' })
+  @JoinColumn({ name: 'tripId' })
+  trip: Trip;
 }

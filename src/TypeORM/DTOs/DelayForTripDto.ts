@@ -17,7 +17,7 @@ export class DelayForTripDTO {
         const delayDTO = new DelayForTripDTO({
             id: delay.id,
             duration: delay.duration,
-            stationName: delay.Station? delay.Station.name : null,
+            stationName: delay.stationName,
             timestamp: delay.timestamp ,
         });
 

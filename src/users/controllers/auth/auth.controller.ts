@@ -39,7 +39,7 @@ export class AuthController {
     @UsePipes(ValidationPipe)
     async Login(@Body() body: any) {
         const { email, password } = body;
-        return this.authService.Login(email, password);
+        return this.authService.Login(email, password,);
     }
 
 }

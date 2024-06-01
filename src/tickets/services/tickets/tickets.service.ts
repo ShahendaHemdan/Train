@@ -11,12 +11,12 @@ export class TicketsService {
 
     }
     findAllTickets() {
-        return this.ticketRepository.find({ relations: ["trips"] });
+        return this.ticketRepository.find({ relations: ["trip"] });
     }
 
 
     findTicketById(id: number) {
-        return this.ticketRepository.findOne({ where: { id }, relations: ["trips"] });
+        return this.ticketRepository.findOne({ where: { id }, relations: ["trip"] });
 
     }
 
@@ -24,6 +24,7 @@ export class TicketsService {
         return this.ticketRepository.findBy({ id });
 
     }
+
 
     async createTcketWithDetails(ticketDetails: Ticket): Promise<Ticket> {
         const newTicket = this.ticketRepository.create(ticketDetails);

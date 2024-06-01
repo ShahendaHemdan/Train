@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, ParseIntPipe, Post, Put, Res, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, ParseIntPipe, Post, Put, Res, UseGuards, UsePipes, ValidationPipe,Req } from '@nestjs/common';
 import { TrainDTO } from 'src/TypeORM/DTOs/TrainDto';
 import { TrainsService } from '../../services/trains/trains.service';
 import { Response } from 'express';
@@ -6,6 +6,7 @@ import { Train } from 'src/TypeORM/entities/Train';
 import { Role } from 'src/decorators/roles.decorator';
 import { AuthurizationGuard } from 'src/guards/Authorization.guard';
 import { JwtAuthGuard } from 'src/guards/jwt.guard';
+import { Request } from 'express';
 @Role('admin')
 @UseGuards(JwtAuthGuard,AuthurizationGuard)
 @Controller('trains')
@@ -41,6 +42,10 @@ export class TrainsController {
         }
     }
 
+    @Post('test')
+    setHello(@Req() req: Request){
+        // console.log(req.cookies);
+    }
     @Post()
     @UsePipes(ValidationPipe)
     addTrain(@Body() trainDto: Train, @Res() res: Response) {

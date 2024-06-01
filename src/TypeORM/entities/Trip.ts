@@ -1,8 +1,9 @@
-import { Entity, Column, PrimaryGeneratedColumn, JoinColumn, OneToMany,ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, JoinColumn, OneToMany,ManyToOne, OneToOne } from 'typeorm';
 import { Train } from './Train';
 import { Delay } from './Delay';
 import {  IsNotEmpty, IsString } from 'class-validator';
 import { Ticket } from './Tickets';
+import { UserTicket } from './UserTicket ';
 @Entity()
 export class Trip {
 
@@ -46,9 +47,16 @@ export class Trip {
     delays: Delay[];
 
      // Define the relationship with Ticket class
-    @ManyToOne(() => Ticket, ticket => ticket.trips)
+    // @ManyToOne(() => Ticket, ticket => ticket.trips)
+    // @JoinColumn()
+    // ticket: Ticket;
+
+    @OneToOne(() => Ticket, ticket => ticket.trip, { cascade: true })
     @JoinColumn()
     ticket: Ticket;
+
+    @OneToMany(() => UserTicket, userTicket => userTicket.trip,{ cascade: true })
+    userTickets: UserTicket[];
 
 
 }

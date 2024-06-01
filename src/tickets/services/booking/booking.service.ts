@@ -12,6 +12,7 @@ export class BookingService {
 
     async bookTicket(bookingData: UserTicket): Promise<UserTicket> {
 
+        
         const newTicket = this.userTicketRepository.create(bookingData);
 
         return await this.userTicketRepository.save(newTicket);
