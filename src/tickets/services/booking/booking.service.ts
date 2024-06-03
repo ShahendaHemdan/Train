@@ -12,18 +12,31 @@ export class BookingService {
 
     async bookTicket(bookingData: UserTicket): Promise<UserTicket> {
 
-        
+
         const newTicket = this.userTicketRepository.create(bookingData);
 
         return await this.userTicketRepository.save(newTicket);
     }
 
-    findBookingById(id:number){
+    findBookingById(id: number) {
         return this.userTicketRepository.findOne({ where: { id }, relations: ["ticket"] });
     }
 
-    cancel(id:number){
+    cancel(id: number) {
         this.userTicketRepository.delete(id);
+    }
+
+    async findTicketsByUserId(userId: number) {
+        const userTicket = await this.userTicketRepository.find({
+            where: { user: { id: userId } },
+            relations: ["ticket"]
+        });
+
+        if (userTicket) {
+            return userTicket.map((ut) => ut.ticket);
+        }
+
+        return [];
     }
 
 

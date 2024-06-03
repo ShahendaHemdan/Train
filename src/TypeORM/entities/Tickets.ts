@@ -19,11 +19,7 @@ export class Ticket {
     @Column()
     availTic: number;
 
-  //  // Define the relationship with Trip class
-  // @OneToMany(() => Trip, trip => trip.ticket,{ cascade: true })
-  // trips: Trip[];
-
-  @OneToOne(() => Trip)
+  @OneToOne(() => Trip, trip => trip.ticket, { cascade: true })
   @JoinColumn()
   trip: Trip;
     // Define the relationship with User Class 

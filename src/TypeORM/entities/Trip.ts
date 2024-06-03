@@ -51,7 +51,7 @@ export class Trip {
     // @JoinColumn()
     // ticket: Ticket;
 
-    @OneToOne(() => Ticket, ticket => ticket.trip, { cascade: true })
+    @OneToOne(() => Ticket, ticket => ticket.trip)
     @JoinColumn()
     ticket: Ticket;
 

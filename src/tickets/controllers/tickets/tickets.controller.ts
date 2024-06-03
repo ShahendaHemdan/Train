@@ -17,7 +17,6 @@ export class TicketsController {
     @Get()
     async getAllTickets(@Res() res: Response) {
         const tickets = await this.ticketService.findAllTickets();
-
         if (tickets[0]) {
             return res.status(200).json({ status: HttpStatus.OK, data: tickets })
         } else {
@@ -43,6 +42,7 @@ export class TicketsController {
     async createTicket(@Body() ticketData: Ticket, @Res() res: Response) {
         //Check in Trip Id
         const trip = await this.tripService.findTripById(ticketData.trip[0].id);
+        ticketData.trip=trip;
         if (!trip) {
             return res.status(404).json({ status: HttpStatus.NOT_FOUND, msg: 'trip not found' });
         } else {

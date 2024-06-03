@@ -24,6 +24,8 @@ export class TripsController {
     async getAllTrips(@Res() res: Response) {
     
         const trips = await this.tripService.findAllTrips();
+      
+
         if (trips[0]) {
             const tripDTO = trips.map((trip) => TripDTO.createFromEntity(trip));
             res.status(200).json({ Status: HttpStatus.OK, Data: tripDTO });

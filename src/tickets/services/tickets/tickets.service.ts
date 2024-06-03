@@ -58,7 +58,8 @@ export class TicketsService {
     }
 
     async updateTicket(id: number, ticketDetails: Ticket) {
-        return this.ticketRepository.update({ id }, ticketDetails);
+        const result = await this.ticketRepository.update(id, ticketDetails);
+        return result;
     }
 
     deleteTicket(id: number) {
