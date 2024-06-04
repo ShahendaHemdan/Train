@@ -20,6 +20,12 @@ export class TicketsService {
 
     }
 
+   
+    
+    findTicketByTripId(trip: Trip) {
+      return this.ticketRepository.findOne({ where: { trip }, relations: ["trip"] });
+    }
+
     findTicketBy(id: number) {
         return this.ticketRepository.findBy({ id });
 
