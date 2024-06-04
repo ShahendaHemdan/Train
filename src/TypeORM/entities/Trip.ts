@@ -16,12 +16,12 @@ export class Trip {
     name: string;
 
 
-    @Column()
+    @Column({ type: 'time' })
     @IsNotEmpty()
     arrTime: Date;
 
 
-    @Column()
+    @Column({ type: 'time' })
     @IsNotEmpty()
     deptTime: Date;
 
@@ -36,7 +36,10 @@ export class Trip {
     destination: string;
 
 
-
+ 
+  
+    @Column({ type: 'date' })
+    date:Date;
 
     @ManyToOne(() => Train, train => train.trips, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
     @JoinColumn()
@@ -46,10 +49,6 @@ export class Trip {
     @OneToMany(() => Delay, delay => delay.Trip, { cascade: true })
     delays: Delay[];
 
-     // Define the relationship with Ticket class
-    // @ManyToOne(() => Ticket, ticket => ticket.trips)
-    // @JoinColumn()
-    // ticket: Ticket;
 
     @OneToOne(() => Ticket, ticket => ticket.trip)
     @JoinColumn()

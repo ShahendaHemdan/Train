@@ -13,7 +13,7 @@ export class Delay {
   @Column({ default: false })
   processed: boolean;
 
-  @Column({ default: () => 'CURRENT_TIMESTAMP' })
+  @Column({ type: 'time', default: () => 'CURRENT_TIME' })
   timestamp: Date;
 
   @ManyToOne(() => Trip, trip => trip.delays, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
@@ -21,9 +21,9 @@ export class Delay {
   Trip: Trip;
 
   @ManyToOne(() => Station, station => station.delays, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
-  @JoinColumn({ name: 'stationId' }) // Add this line
-  Station: Station; // Rename to uppercase 'Station'
+  @JoinColumn({ name: 'stationId' }) 
+  Station: Station; 
   
-  @Column() // Add this line
-  stationName: string; // Add this line
+  @Column() 
+  stationName: string;
 }

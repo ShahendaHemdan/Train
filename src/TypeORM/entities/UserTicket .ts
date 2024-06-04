@@ -11,6 +11,13 @@ export class UserTicket {
   @Column()
   seatNumber: number;
 
+  @Column({ type: 'time', default: () => 'CURRENT_TIME' })
+  time: Date;
+
+  @Column({ type: 'date', default: () => 'CURRENT_DATE' })
+  date: Date;
+
+
   @ManyToOne(() => User, user => user.userTickets,{ onDelete: 'CASCADE', onUpdate: 'CASCADE' })
   @JoinColumn({ name: 'userId' })
   user: User;
