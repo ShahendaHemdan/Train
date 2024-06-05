@@ -49,7 +49,7 @@ export class DelaysController {
     }
 
 
-    @Post('create')
+    @Post()
     async createDelay(@Body() DelayDetails: DelayDTO, @Res() res: Response) {
 
         const { tripId, stationId } = DelayDetails;

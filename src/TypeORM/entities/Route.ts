@@ -11,25 +11,38 @@ export class Route {
     station1: Station;
 
     @Column({ type: 'time' })
-    arrivalTime1: Date;
+    arrivalTime1: string;
+
+    @Column({ default: false })
+    arrived1: boolean;
+
 
     @ManyToOne(() => Station, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
     station2: Station;
 
     @Column({ type: 'time' })
-    arrivalTime2: Date;
+    arrivalTime2: string;
 
+    @Column({ default: false })
+    arrived2: boolean;
     @ManyToOne(() => Station, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
     station3: Station;
 
     @Column({ type: 'time' })
-    arrivalTime3: Date;
+    arrivalTime3: string;
+
+    @Column({ default: false })
+    arrived3: boolean;
+
 
     @ManyToOne(() => Station, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
     station4: Station;
 
     @Column({ type: 'time' })
-    arrivalTime4: Date;
+    arrivalTime4: string;
+
+    @Column({ default: false })
+    arrived4: boolean;
 
     @OneToMany(() => Trip, trip => trip.route)
     trips: Trip[];

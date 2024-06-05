@@ -65,13 +65,13 @@ export class RouteController {
 
     
 
-    // @Get("/trip/:id")
-    // async findByTripId(@Res() res:Response,@Param('id') id: number) {
-    //     const routes=await this.routeService.findByTripId(id);
-    //     if (routes) {
-    //         return res.status(200).json({status:HttpStatus.OK,data:routes})
-    //     } else {
-    //         return res.status(404).json({status:HttpStatus.NOT_FOUND,msg:'There are no Routes'})
-    //     }
-    // }
+    @Get("/trip/:id")
+    async findByTripId(@Res() res:Response,@Param('id') id: number) {
+        const routes=await this.routeService.findByTripId(id);
+        if (routes) {
+            return res.status(200).json({status:HttpStatus.OK,data:routes})
+        } else {
+            return res.status(404).json({status:HttpStatus.NOT_FOUND,msg:'There are no Routes'})
+        }
+    }
 }

@@ -36,8 +36,8 @@ export class RouteService {
       }
 
 
-      // async findByTripId(id: number): Promise<Route> {
-      //   const trip = await this.tripRepository.findOne({ where: { id }, relations: ['route',"route.station1", "route.station2", "route.station3", "route.station4"] });
-      //   return trip.route;
-      // }
+      async findByTripId(id: number): Promise<Route> {
+        const trip = await this.tripRepository.findOne({ where: { id }, relations: ['route',"route.station1", "route.station2", "route.station3", "route.station4"] });
+        return trip.route;
+      }
 }

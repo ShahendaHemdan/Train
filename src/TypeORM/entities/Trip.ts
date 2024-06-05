@@ -19,11 +19,11 @@ export class Trip {
 
     @Column({ type: 'time' })
     @IsNotEmpty()
-    arrTime: Date;
+    arrTime: string;
 
     @Column({ type: 'time' })
     @IsNotEmpty()
-    deptTime: Date;
+    deptTime: string;
 
     @Column()
     @IsString()

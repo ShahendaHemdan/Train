@@ -27,8 +27,7 @@ export class TripsController {
       
 
         if (trips[0]) {
-            const tripDTO = trips.map((trip) => TripDTO.createFromEntity(trip));
-            res.status(200).json({ Status: HttpStatus.OK, Data: tripDTO });
+            res.status(200).json({ Status: HttpStatus.OK, Data: trips });
         } else {
             throw new HttpException('There are no Trips', HttpStatus.NOT_FOUND);
         }
@@ -52,8 +51,7 @@ export class TripsController {
         // Send initial data
         const trips = await this.tripService.findAllTrips();
         if (trips[0]) {
-            const tripDTO = trips.map((trip) => TripDTO.createFromEntity(trip));
-            sendEvent({ Status: HttpStatus.OK, Data: tripDTO });
+            sendEvent({ Status: HttpStatus.OK, Data: trips });
         } else {
             throw new HttpException('There are no Trips', HttpStatus.NOT_FOUND);
         }
@@ -65,8 +63,7 @@ export class TripsController {
             if (this.delayAdded) {
                 const updatedTrips = await this.tripService.findAllTrips();
                 if (updatedTrips[0]) {
-                    const updatedTripDTO = updatedTrips.map((trip) => TripDTO.createFromEntity(trip));
-                    sendEvent({ Status: HttpStatus.OK, Data: updatedTripDTO, Updated: true });
+                    sendEvent({ Status: HttpStatus.OK, Data: updatedTrips, Updated: true });
                     this.delayAdded = false; // Reset the flag after sending the update
                 }
             }
@@ -85,8 +82,7 @@ export class TripsController {
     async getTripById(@Param('id', ParseIntPipe) id: number, @Res() res: Response) {
         const trip = await this.tripService.findTripById(id);
         if (trip) {
-            const tripDTO = TripDTO.createFromEntity(trip);
-            return res.status(200).json({ status: HttpStatus.OK, data: tripDTO });
+            return res.status(200).json({ status: HttpStatus.OK, data: trip });
 
         } else {
             return res.status(404).json({ status: HttpStatus.NOT_FOUND, msg: "Trip Not Found" });

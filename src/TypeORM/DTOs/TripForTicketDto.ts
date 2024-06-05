@@ -6,8 +6,8 @@ import { Trip } from '../entities/Trip';
 export class TripForTicketDto {
   id: number;
   name: string;
-  arrTime: Date;
-  deptTime: Date;
+  arrTime: string;
+  deptTime: string;
   origin: string;
   destination: string;
   train: TrainTripDTO;
@@ -15,7 +15,7 @@ export class TripForTicketDto {
   constructor(data: TripForTicketDto) {
     this.id = data?.id || 0;
     this.name = data.name;
-    this.arrTime = data.arrTime || new Date();
+    this.arrTime = data.arrTime;
     this.deptTime = data.deptTime;
     this.origin = data.origin;
     this.destination = data.destination;
@@ -25,7 +25,7 @@ export class TripForTicketDto {
     const tripDTO = new TripForTicketDto({
       id: entity.id,
       name: entity.name,
-      arrTime: entity.arrTime || new Date(),
+      arrTime: entity.arrTime,
       deptTime: entity.deptTime,
       origin: entity.origin,
       destination: entity.destination,

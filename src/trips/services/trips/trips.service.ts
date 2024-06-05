@@ -16,12 +16,11 @@ export class TripsService {
     
     }
     findAllTrips(){
-        return this.tripRepository.find({relations:["train","delays"]});
-    }
+        return this.tripRepository.find({ relations: ["delays",'route', 'route.station1', 'route.station2', 'route.station3', 'route.station4'] });    }
 
 
     findTripById(id:number){
-        return this.tripRepository.findOne({ where: { id }, relations: ["train","delays"] });
+        return this.tripRepository.findOne({ where: { id }, relations: ["train","delays","route","route.station1", "route.station2", "route.station3", "route.station4"] });
 
     }
 
@@ -37,7 +36,7 @@ export class TripsService {
 
         const newTrip = this.tripRepository.create({
             ...tripDetails,
-            arrTime: tripDetails.arrTime || new Date(),
+            arrTime: tripDetails.arrTime,
             train: train,
         });
 
