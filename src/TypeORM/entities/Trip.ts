@@ -1,9 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn, JoinColumn, OneToMany,ManyToOne, OneToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, JoinColumn, OneToMany, ManyToOne, OneToOne } from 'typeorm';
 import { Train } from './Train';
 import { Delay } from './Delay';
-import {  IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 import { Ticket } from './Tickets';
 import { UserTicket } from './UserTicket ';
+import { Route } from './Route';
+
 @Entity()
 export class Trip {
 
@@ -15,11 +17,9 @@ export class Trip {
     @IsNotEmpty()
     name: string;
 
-
     @Column({ type: 'time' })
     @IsNotEmpty()
     arrTime: Date;
-
 
     @Column({ type: 'time' })
     @IsNotEmpty()
@@ -35,32 +35,23 @@ export class Trip {
     @IsNotEmpty()
     destination: string;
 
-
- 
-  
     @Column({ type: 'date' })
-    date:Date;
+    date: Date;
 
     @ManyToOne(() => Train, train => train.trips, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
     @JoinColumn()
     train: Train;
-    
-    // Define the relationship with Delay entity
+
     @OneToMany(() => Delay, delay => delay.Trip, { cascade: true })
     delays: Delay[];
-
 
     @OneToOne(() => Ticket, ticket => ticket.trip)
     @JoinColumn()
     ticket: Ticket;
 
-    @OneToMany(() => UserTicket, userTicket => userTicket.trip,{ cascade: true })
+    @OneToMany(() => UserTicket, userTicket => userTicket.trip, { cascade: true })
     userTickets: UserTicket[];
 
-
+    @ManyToOne(() => Route, route => route.trips,{cascade:true})
+    route: Route;
 }
-
-
-
-
-

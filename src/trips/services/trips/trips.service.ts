@@ -12,7 +12,6 @@ export class TripsService {
 
     constructor(@InjectRepository(Trip) private tripRepository:Repository<Trip>,
     @InjectRepository(Train) private trainRepository: Repository<Train>,
-    private trainServiece:TrainsService
     ){
     
     }
@@ -25,6 +24,7 @@ export class TripsService {
         return this.tripRepository.findOne({ where: { id }, relations: ["train","delays"] });
 
     }
+
 
 
 

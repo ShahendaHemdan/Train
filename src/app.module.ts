@@ -18,6 +18,8 @@ import { DelaysModule } from './delays/delays.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { UserTicket } from './TypeORM/entities/UserTicket ';
+import { Route } from './TypeORM/entities/Route';
+import { RouteModule } from './route/route.module';
 
 
 @Module({
@@ -28,8 +30,8 @@ import { UserTicket } from './TypeORM/entities/UserTicket ';
       port: 3306,
       username: 'root',
       password: '',
-      database: 'railway',
-      entities: [User,Train,Station,Trip,Ticket,Delay,UserTicket],
+      database: 'final',
+      entities: [User,Train,Station,Trip,Ticket,Delay,UserTicket,Route],
       synchronize: true,
     }),
     UsersModule,
@@ -40,6 +42,7 @@ import { UserTicket } from './TypeORM/entities/UserTicket ';
     DelaysModule,
     ScheduleModule.forRoot(),
     EventEmitterModule.forRoot(),
+    RouteModule,
     
   ],
   controllers: [AppController],

@@ -21,9 +21,9 @@ export class Delay {
   Trip: Trip;
 
   @ManyToOne(() => Station, station => station.delays, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
-  @JoinColumn({ name: 'stationId' }) 
-  Station: Station; 
+  @JoinColumn({ name: 'stationId' })
+  Station: Station;
   
   @Column() 
-  stationName: string;
+  stationName: string; 
 }
